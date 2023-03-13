@@ -12,3 +12,20 @@ function setup(){
     poseNet=ml5.poseNet(video, modelLoaded);
     poseNet.on('pose',gotPoses);
 }
+function modelLoaded(){
+    console.log('PoseNet is initialized');
+}
+function gotPoses(results){
+if(results.length>0){
+    console.log(results);
+    noseX=results[0].pose.nose.x-50;
+    noseY=results[0].pose.nose.y-25;
+}
+}
+function draw(){
+    image(video, 0, 0, 300, 300);
+    image(mustache, noseX, noseY, 100, 100);
+}
+function take_snapshot(){
+    save('myFilterImage.png');
+}
